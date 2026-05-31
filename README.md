@@ -1,5 +1,6 @@
 ```shell
 make PHP_VERSION=8.4 build
+make PHP_VERSION=8.4 publish
 ```
 
 Publish is handled by GitHub Actions on tag push:

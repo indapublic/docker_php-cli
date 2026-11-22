@@ -4,6 +4,11 @@ on:
   push:
     tags:
       - "*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: PHP version to build, e.g. 8.4
+        required: true
 
 jobs:
   publish:
@@ -17,7 +22,8 @@ jobs:
         id: version
         shell: bash
         run: |
-          version="${GITHUB_REF_NAME#v}"
+          version="${{ inputs.version || github.ref_name }}"
+          version="${version#v}"
           echo "php_version=${version}" >> "$GITHUB_OUTPUT"
           echo "image_tag=${version}" >> "$GITHUB_OUTPUT"
 
